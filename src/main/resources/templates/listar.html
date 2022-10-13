@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeLeaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Clientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/cliente/listarhome}">
+            <img th:src="@{/imagenes/barros.png}" alt="Logo" width="90px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/producto/listar}" aria-current="page">Productos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/factura/listar}" aria-current="page">Registro de Facturas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/factura/forml}">Hacer Venta</a>
+                </li>
+            </ul>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link active" aria-current="page" th:href="@{/cerrar}" >Log Out</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<br/>
+<div class="container">
+    <h1 class="text-seconday " >Listado de Clientes</h1>
+    <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+         th:text="${mensaje}"
+         class="alert">
+    </div>
+    <a th:href="@{/cliente/agregar}" class="btn btn-success btn-xs">Crear Cliente</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Ruc</th>
+            <th>Direccion</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente:${clientes}">
+            <td th:text="${cliente.codigo}"></td>
+            <td th:text="${cliente.nombre}"></td>
+            <td th:text="${cliente.apellido}"></td>
+            <td th:text="${cliente.ruc}"></td>
+            <td th:text="${cliente.direccion}"></td>
+            <td th:text="${cliente.telefono}"></td>
+            <td th:text="${cliente.email}"></td>
+            <td><a class="btn btn-primary btn-xs" th:href="@{/cliente/editar/}+${cliente.codigo}" th:text="Editar"></a></td>
+            <td><a class="btn btn-danger btn-xs" th:href="@{/cliente/eliminar/}+${cliente.codigo}" th:text="Eliminar"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+<footer class="bg-dark text-white text-lg-start mt-auto" >
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+
+        <p class="text-white">© 2022 Derechos Reservados | Fabián Enrique Chuqui Barros</p>
+    </div>
+    <!-- Copyright -->
+</footer>
+
+</body>
+</html>

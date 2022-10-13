@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeLeaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Factura Final</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body class="bg-secondary d-flex flex-column min-vh-100 " >
+<nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/cliente/listarhome}">
+            <img th:src="@{/imagenes/barros.png}" alt="Logo" width="90px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/cliente/listar}">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/producto/listar}" aria-current="page">Productos</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" aria-current="page">Registro de Facturas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/factura/forml}">Hacer Venta</a>
+                </li>
+            </ul>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link active" aria-current="page" th:href="@{/cerrar}" >Log Out</a>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<div class="container ">
+    <div class="w-50 bg-light rounded-3 " style="margin:auto; margin-top:25px; padding:15px">
+        <div class="card">
+            <img th:src="@{/imagenes/barros.png}"  width="100px" style="margin:auto" alt="...">
+            <div class="card-body">
+                <h4 style="text-align:center" th:text="'Factura '+${factura.codigoe}"></h4>
+                <br class="">
+                <div class="row g-3">
+                    <div class="mt-3 col-md-4">
+                        <p class="fw-bold">RUC</p>
+                        <p th:text="${factura.cliente.ruc}"></p>
+                    </div>
+                    <div class="mt-3 col-md-4">
+                        <p class="fw-bold">Nombre</p>
+                        <p th:text="${factura.cliente.nombre}"></p>
+                    </div>
+                    <div class="mt-3 col-md-4">
+                        <p class="fw-bold">Apellido</p>
+                        <p th:text="${factura.cliente.apellido}"></p>
+                    </div>
+                    <div class="mt-3 col-md-3">
+                        <p class="fw-bold">Telefono</p>
+                        <p th:text="${factura.cliente.telefono}"></p>
+                    </div>
+                    <div class="mt-3 col-md-9">
+                        <p class="fw-bold">Direccion</p>
+                        <p th:text="${factura.cliente.direccion}"></p>
+                    </div>
+                    <div class="mt-3 col-md-12">
+                        <p class="fw-bold">Email</p>
+                        <p th:text="${factura.cliente.email}"></p>
+                    </div>
+                    <div class="mt-3 col-md-12">
+                        <h4 class="fw-bold">Detalle de la Factura</h4>
+                        <table class="table bg-light">
+                            <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:if="${itemsfactura!=null}" th:each="itemfactura: ${itemsfactura}">
+                                <td th:text="${itemfactura.producto.nombrep}"></td>
+                                <td th:text="${itemfactura.cantidad}"></td>
+                                <td th:text="${itemfactura.subtotal}"></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="mt-3 col-md-12">
+                        <p class="fw-bold">Total</p>
+                        <p th:text="${factura.total}"></p>
+                    </div>
+
+                </div>
+                <p class="card-text" th:text="${content}"></p>
+                <a href="/factura/listar" class="btn btn-primary" >Regresar</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+<footer class="bg-dark text-white text-lg-start mt-auto" >
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+
+        <p class="text-white">© 2022 Derechos Reservados | Fabián Enrique Chuqui Barros</p>
+    </div>
+    <!-- Copyright -->
+</footer>
+</body>
+
+</html>
